@@ -13,7 +13,7 @@ import fctrl.com.br.fincontrol.model.enumerations.EAccountStatus;
 import fctrl.com.br.fincontrol.model.enumerations.ETypeAccountPlan;
 
 @RestController
-@RequestMapping("/api/account")
+@RequestMapping("/account")
 public class AccountController {
     
     @GetMapping
@@ -30,6 +30,6 @@ public class AccountController {
         type.setType(ETypeAccountPlan.PAY);
         ac.setType(type);
 
-        return List.of(ac, ac);
+        return List.of(ac, ac, ac);
     }
 }
