@@ -1,0 +1,1 @@
+ALTER TABLE public.account_plan RENAME COLUMN "type_account" TO type;

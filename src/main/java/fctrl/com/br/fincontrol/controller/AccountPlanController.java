@@ -10,26 +10,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import fctrl.com.br.fincontrol.model.Account;
-import fctrl.com.br.fincontrol.repository.AccountRepository;
-import jakarta.validation.Valid;
+import fctrl.com.br.fincontrol.model.AccountPlan;
+import fctrl.com.br.fincontrol.repository.AccountPlanRepository;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/account")
-public class AccountController {
+@RequestMapping("/account_plan")
+public class AccountPlanController {
     
-    private final AccountRepository repository;
+    private AccountPlanRepository repository;
 
-    @GetMapping(produces = "application/json")
-    public List<Account> list() {
+    @GetMapping
+    public List<AccountPlan> list() {
         return repository.findAll();
     }
 
     @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping(produces = "application/json")
-    public Account save(@RequestBody @Valid Account acc) {
-        return repository.save(acc);
+    public AccountPlan save(@RequestBody AccountPlan accountPlan) {
+        return repository.save(accountPlan);
     }
 }
