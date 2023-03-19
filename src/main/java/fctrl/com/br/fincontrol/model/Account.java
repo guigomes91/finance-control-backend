@@ -11,7 +11,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,7 +24,7 @@ public class Account {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
 
-  @NotBlank
+  @NotNull
   @Column(nullable = false)
   private Date due;
 
