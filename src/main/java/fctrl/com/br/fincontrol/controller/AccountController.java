@@ -9,10 +9,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import fctrl.com.br.fincontrol.model.Account;
+import fctrl.com.br.fincontrol.model.enumerations.EAccountStatus;
 import fctrl.com.br.fincontrol.repository.AccountRepository;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -35,14 +37,16 @@ public class AccountController {
         return repository.save(acc);
     }
 
+    @ResponseStatus(code = HttpStatus.OK)
     @DeleteMapping
-    public void delete(UUID id) throws Exception {
-        Account acDelete = repository.findById(id).orElse(null);
-
-        if (acDelete == null) {
-            throw new Exception("Conta não encontrada!");
-        }
-
+    public void delete(UUID id) {
+        Account acDelete = repository.findById(id).orElseThrow();
         repository.delete(acDelete);
+    }
+
+    @ResponseStatus(code = HttpStatus.OK)
+    @GetMapping("/find")
+    public List<Account> findByFiltroSituacao(@RequestParam("filtro") EAccountStatus filtro) {
+        return repository.findByStatus(filtro);
     }
 }
