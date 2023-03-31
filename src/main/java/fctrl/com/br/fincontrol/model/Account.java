@@ -3,6 +3,8 @@ package fctrl.com.br.fincontrol.model;
 import java.util.Date;
 import java.util.UUID;
 
+import org.hibernate.validator.constraints.Length;
+
 import fctrl.com.br.fincontrol.model.enumerations.EAccountStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,10 +15,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
-@NoArgsConstructor
 @Entity
 public class Account {
 
@@ -43,6 +43,7 @@ public class Account {
 
   @NotNull
   @Column(length = 200, nullable = false)
+  @Length(min = 5, max = 100, message="Valor da descrição deve estar entre minimo {min} e máximo {max}")
   private String description;
 
   @NotNull

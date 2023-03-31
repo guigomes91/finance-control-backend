@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.0.4</version>
+		<version>3.0.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fctrl.com.br</groupId>
@@ -65,7 +65,12 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.9.2</version>
 		</dependency>		
-		
+		<dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-boot-starter</artifactId>
+            <version>3.0.0</version>
+   		</dependency>
+
 	</dependencies>
 
 	<build>
@@ -80,6 +85,24 @@
 							<artifactId>lombok</artifactId>
 						</exclude>
 					</excludes>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>1.4.13</version>
+				<configuration>
+					<repository>gomes/fincontrol</repository>
+					<tag>1.0</tag>
+					<baseImage>openjdk/11</baseImage>
+					<entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+					<exposes>8080</exposes>
+					<resources>
+						<targetPath>/</targetPath>
+						<directory>${project.build.directory}</directory>
+						<include>${project.build.finalName}.jar</include>
+					</resources>
 				</configuration>
 			</plugin>
 		</plugins>
