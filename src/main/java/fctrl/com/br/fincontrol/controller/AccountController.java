@@ -1,6 +1,7 @@
 package fctrl.com.br.fincontrol.controller;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -19,9 +20,11 @@ import org.springframework.web.bind.annotation.RestController;
 import fctrl.com.br.fincontrol.model.Account;
 import fctrl.com.br.fincontrol.model.enumerations.EAccountStatus;
 import fctrl.com.br.fincontrol.repository.AccountRepository;
+import fctrl.com.br.fincontrol.service.AccountServiceImpl;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.launch.PatchFixesHider.Util;
 
 @Valid
 @AllArgsConstructor
@@ -30,6 +33,7 @@ import lombok.AllArgsConstructor;
 public class AccountController {
     
     private final AccountRepository repository;
+    private final AccountServiceImpl accountService;
 
     @GetMapping(produces = "application/json")
     public List<Account> list() {
@@ -52,19 +56,13 @@ public class AccountController {
     @PutMapping("/{id}")
     public ResponseEntity<Account> update(@PathVariable @NotNull UUID id, 
         @RequestBody @Valid Account acc) {
-        return repository.findById(id)
-            .map(recordFound -> {
-                recordFound.setDescription(acc.getDescription());
-                recordFound.setDue(acc.getDue());
-                recordFound.setPayment(acc.getPayment());
-                recordFound.setAmount(acc.getAmount());
-                recordFound.setPortion(acc.getPortion());
-                recordFound.setType(acc.getType());
-                recordFound.setStatus(acc.getStatus());
-                Account updated = repository.save(recordFound);
-                return ResponseEntity.ok().body(updated);
-            })
-            .orElse(ResponseEntity.notFound().build());
+
+        Account accountSaved = accountService.update(acc, id);
+        if (!Objects.isNull(accountSaved)) {
+            return ResponseEntity.ok().body(accountSaved);
+        }
+        
+        return ResponseEntity.notFound().build();
     }
 
     @ResponseStatus(code = HttpStatus.OK)
