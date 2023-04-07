@@ -1,5 +1,6 @@
 package fctrl.com.br.fincontrol.service;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +30,11 @@ public class AccountServiceImpl implements AccountService {
                 return repository.save(recordFound);
             })
             .orElse(null);
+    }
+
+    @Override
+    public List<Account> list() {
+        return repository.findAll();
     }
     
 }

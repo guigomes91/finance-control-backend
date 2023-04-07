@@ -24,7 +24,6 @@ import fctrl.com.br.fincontrol.service.AccountServiceImpl;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
-import lombok.launch.PatchFixesHider.Util;
 
 @Valid
 @AllArgsConstructor
@@ -37,7 +36,7 @@ public class AccountController {
 
     @GetMapping(produces = "application/json")
     public List<Account> list() {
-        return repository.findAll();
+        return accountService.list();
     }
 
     @GetMapping("/{id}")
