@@ -53,7 +53,7 @@ public class AccountController {
     @ResponseStatus(code = HttpStatus.CREATED)
     @PostMapping(produces = "application/json")
     public Account save(@RequestBody @Valid Account acc) {
-        return repository.save(acc);
+        return accountService.save(acc);
     }
 
     @PutMapping("/{id}")
@@ -71,13 +71,12 @@ public class AccountController {
     @ResponseStatus(code = HttpStatus.OK)
     @DeleteMapping
     public void delete(UUID id) {
-        Account acDelete = repository.findById(id).orElseThrow();
-        repository.delete(acDelete);
+        accountService.delete(id);
     }
 
     @ResponseStatus(code = HttpStatus.OK)
-    @GetMapping("/find")
-    public List<Account> findByFiltroSituacao(@RequestParam("filtro") EAccountStatus filtro) {
-        return repository.findByStatus(filtro);
+    @GetMapping("/situacao")
+    public List<Account> findBySituacao(@RequestParam("situacao") EAccountStatus sit) {
+        return accountService.findBySituacao(sit);
     }
 }

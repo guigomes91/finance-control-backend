@@ -13,5 +13,4 @@ public interface AccountRepository extends JpaRepository<Account, UUID> {
 
     @Query("select a from Account a where status = :filtro")
     List<Account> findByStatus(EAccountStatus filtro);
-    
 }
