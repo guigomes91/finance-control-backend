@@ -8,4 +8,6 @@ public interface AccountService {
     Account update(Account acc, UUID id);
 
     List<Account> list();
+
+    Account listById(UUID id);
 }

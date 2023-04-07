@@ -41,9 +41,13 @@ public class AccountController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Account> listById(@PathVariable @NotNull UUID id) {
-        return repository.findById(id)
-            .map(acc -> ResponseEntity.ok().body(acc))
-            .orElse(ResponseEntity.notFound().build());
+        Account acount = accountService.listById(id);
+
+        if (!Objects.isNull(acount)) {
+            return ResponseEntity.ok().body(acount);
+        }
+
+        return ResponseEntity.notFound().build();       
     }
 
     @ResponseStatus(code = HttpStatus.CREATED)

@@ -36,5 +36,10 @@ public class AccountServiceImpl implements AccountService {
     public List<Account> list() {
         return repository.findAll();
     }
+
+    @Override
+    public Account listById(UUID id) {
+        return repository.findById(id).orElse(null);
+    }
     
 }
