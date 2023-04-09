@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fctrl.com.br.fincontrol.model.Account;
 import fctrl.com.br.fincontrol.model.enumerations.EAccountStatus;
-import fctrl.com.br.fincontrol.service.AccountServiceImpl;
+import fctrl.com.br.fincontrol.service.AccountService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -32,7 +32,7 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/account")
 public class AccountController {
     
-    private final AccountServiceImpl accountService;
+    private final AccountService accountService;
 
     @GetMapping(produces = "application/json")
     public Page<Account> list(@Valid @NotNull Pageable page) {
