@@ -24,14 +24,17 @@ public class User {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    @Column(length = 10, nullable = false)
+    @Column(length=10, nullable=false)
     @Length(min=8, max=10, message="Senha deve ter o minimo {min} de caracteres e máximo {max}")
     private String password;
 
     @NotBlank
-    @Length(min=4)
+    @Length(min=4, max=50)
+    @Column(length=50, nullable=false)
     private String login;
 
     @NotBlank
+    @Length(min=3, max=100, message="Nome deve ter o minimo {min} de caracteres e máximo {max}")
+    @Column(length=100, nullable=false)
     private String name;
 }

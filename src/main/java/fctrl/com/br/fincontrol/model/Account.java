@@ -21,32 +21,32 @@ import lombok.Data;
 public class Account {
 
   @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
+  @GeneratedValue(strategy=GenerationType.AUTO)
   private UUID id;
 
   @NotNull
-  @Column(nullable = false)
+  @Column(nullable=false)
   private Date due;
 
   private Date payment;
 
   @NotNull
-  @Column(nullable = false)
+  @Column(nullable=false)
   private int portion;
 
   @NotNull
-  @Column(nullable = false)
+  @Column(nullable=false)
   private double amount;
 
-  @ManyToOne(fetch = FetchType.EAGER)
+  @ManyToOne(fetch=FetchType.EAGER)
   private AccountPlan type;
 
   @NotNull
-  @Column(length = 200, nullable = false)
-  @Length(min = 5, max = 100, message="Valor da descrição deve estar entre minimo {min} e máximo {max}")
+  @Column(length=200, nullable=false)
+  @Length(min=5, max=100, message="Valor da descrição deve estar entre minimo {min} e máximo {max}")
   private String description;
 
   @NotNull
-  @Column(nullable = false)
+  @Column(nullable=false)
   private EAccountStatus status;
 }
