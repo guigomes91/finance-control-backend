@@ -1,5 +1,6 @@
 package fctrl.com.br.fincontrol.model;
 
+import java.util.Date;
 import java.util.UUID;
 
 import org.hibernate.validator.constraints.Length;
@@ -9,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -37,4 +39,14 @@ public class User {
     @Length(min=3, max=100, message="Nome deve ter o minimo {min} de caracteres e máximo {max}")
     @Column(length=100, nullable=false)
     private String name;
+
+    private Date dateTimeCreated;
+
+    private Date dateTimeChanged;
+
+    @OneToOne
+    private User userCreated;
+
+    @OneToOne
+    private User userChanged;
 }
