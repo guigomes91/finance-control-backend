@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import fctrl.com.br.fincontrol.model.Account;
 import fctrl.com.br.fincontrol.model.enumerations.EAccountStatus;
-import fctrl.com.br.fincontrol.repository.AccountRepository;
 import fctrl.com.br.fincontrol.service.AccountServiceImpl;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -31,12 +32,11 @@ import lombok.AllArgsConstructor;
 @RequestMapping("/account")
 public class AccountController {
     
-    private final AccountRepository repository;
     private final AccountServiceImpl accountService;
 
     @GetMapping(produces = "application/json")
-    public List<Account> list() {
-        return accountService.list();
+    public Page<Account> list(@Valid @NotNull Pageable page) {
+        return accountService.list(page);
     }
 
     @GetMapping("/{id}")

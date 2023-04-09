@@ -3,6 +3,8 @@ package fctrl.com.br.fincontrol.service;
 import java.util.List;
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.transaction.annotation.Transactional;
 
 import fctrl.com.br.fincontrol.model.Account;
@@ -35,8 +37,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Transactional
     @Override
-    public List<Account> list() {
-        return repository.findAll();
+    public Page<Account> list(Pageable page) {
+        return repository.findAll(page);
     }
 
     @Transactional
