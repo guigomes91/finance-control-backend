@@ -41,10 +41,10 @@ public class AccountController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Account> listById(@PathVariable @NotNull UUID id) {
-        Account acount = accountService.listById(id);
+        Account account = accountService.listById(id);
 
-        if (!Objects.isNull(acount)) {
-            return ResponseEntity.ok().body(acount);
+        if (!Objects.isNull(account)) {
+            return ResponseEntity.ok().body(account);
         }
 
         return ResponseEntity.notFound().build();       
