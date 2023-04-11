@@ -59,6 +59,7 @@ public class AccountServiceImpl implements AccountService {
         repository.delete(acDelete);
     }
     
+    @Override
     public List<Account> findBySituacao(EAccountStatus sit) {
         return repository.findByStatus(sit);
     }
