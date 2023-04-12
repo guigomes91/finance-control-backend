@@ -12,4 +12,6 @@ public interface UserService {
     User save(User user);
 
     Page<User> list(Pageable page);
+
+    User listById(UUID id);
 }
