@@ -35,6 +35,18 @@ public class UserController {
         return userService.save(user);
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<User> update(@PathVariable @NotNull UUID id, 
+        @RequestBody @Valid User user) {
+
+        User userSaved = userService.update(user, id);
+        if (!Objects.isNull(userSaved)) {
+            return ResponseEntity.ok().body(userSaved);
+        }
+        
+        return ResponseEntity.notFound().build();
+    }
+
     @GetMapping(produces = "application/json")
     public Page<User> list(@Valid @NotNull Pageable page) {
         return userService.list(page);
