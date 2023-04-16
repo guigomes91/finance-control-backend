@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Transactional;
 
 import fctrl.com.br.fincontrol.model.User;
 import fctrl.com.br.fincontrol.repository.UserRepository;
@@ -14,19 +15,28 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
 
+    @Transactional
     @Override
     public User save(User user) {
         return userRepository.save(user);
     }
 
+    @Transactional
     @Override
     public Page<User> list(Pageable page) {
         return userRepository.findAll(page);
     }
 
+    @Transactional
     @Override
     public User listById(UUID id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    @Transactional
+    @Override
+    public User update(User user, UUID id) {
+        throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
     
 }

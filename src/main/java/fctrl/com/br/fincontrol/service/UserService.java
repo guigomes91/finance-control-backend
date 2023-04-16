@@ -14,4 +14,6 @@ public interface UserService {
     Page<User> list(Pageable page);
 
     User listById(UUID id);
+
+    User update(User user, UUID id);
 }
