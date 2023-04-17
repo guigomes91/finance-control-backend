@@ -16,4 +16,6 @@ public interface UserService {
     User listById(UUID id);
 
     User update(User user, UUID id);
+
+    void delete(UUID id) throws Exception;
 }

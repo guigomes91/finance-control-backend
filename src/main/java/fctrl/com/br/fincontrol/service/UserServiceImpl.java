@@ -48,4 +48,13 @@ public class UserServiceImpl implements UserService {
             })
             .orElse(null);
     }
+
+    @Override
+    public void delete(UUID id) throws Exception {
+        if (userRepository.findById(id).isPresent()) {
+            userRepository.deleteById(id);
+        } else {
+            throw new Exception("Registro não existe!");
+        }
+    }
 }
