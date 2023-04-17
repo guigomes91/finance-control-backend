@@ -1,5 +1,6 @@
 package fctrl.com.br.fincontrol.service;
 
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -36,7 +37,15 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public User update(User user, UUID id) {
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
+        return userRepository.findById(id)
+            .map(recordFound -> {
+                recordFound.setLogin(user.getLogin());
+                recordFound.setName(user.getName());
+                recordFound.setUserChanged(user);
+                recordFound.setDateTimeChanged(new Date());
+
+                return userRepository.save(recordFound);
+            })
+            .orElse(null);
     }
-    
 }
