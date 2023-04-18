@@ -40,13 +40,25 @@ public class User {
     @Column(length=100, nullable=false)
     private String name;
 
+    /**
+     * Data e hora de criação do objeto
+     */
     private Date dateTimeCreated;
 
+    /*
+     * Data e hora de alteração
+     */
     private Date dateTimeChanged;
 
+    /*
+     * Usuário que criou o objeto
+     */
     @OneToOne
     private User userCreated;
 
+    /*
+     * Usuário que alterou o objeto
+     */
     @OneToOne
     private User userChanged;
 }
