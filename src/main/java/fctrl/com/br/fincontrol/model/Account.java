@@ -13,6 +13,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
@@ -49,4 +50,26 @@ public class Account {
   @NotNull
   @Column(nullable=false)
   private EAccountStatus status;
+
+  /**
+   * Data e hora de criação do objeto
+   */
+  private Date dateTimeCreated;
+
+  /*
+    * Data e hora de alteração
+    */
+  private Date dateTimeChanged;
+
+  /*
+    * Usuário que criou o objeto
+    */
+  @OneToOne
+  private User userCreated;
+
+  /*
+    * Usuário que alterou o objeto
+    */
+  @OneToOne
+  private User userChanged;
 }
