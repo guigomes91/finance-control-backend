@@ -5,12 +5,14 @@ import java.util.UUID;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import fctrl.com.br.fincontrol.model.User;
 import fctrl.com.br.fincontrol.repository.UserRepository;
 import lombok.AllArgsConstructor;
 
+@Service
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
