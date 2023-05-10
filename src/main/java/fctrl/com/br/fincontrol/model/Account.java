@@ -5,6 +5,8 @@ import java.util.UUID;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import fctrl.com.br.fincontrol.model.enumerations.EAccountStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -27,8 +29,10 @@ public class Account {
 
   @NotNull
   @Column(nullable=false)
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private Date due;
 
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private Date payment;
 
   @NotNull
@@ -54,11 +58,13 @@ public class Account {
   /**
    * Data e hora de criação do objeto
    */
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private Date dateTimeCreated;
 
   /*
     * Data e hora de alteração
     */
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private Date dateTimeChanged;
 
   /*

@@ -27,5 +27,6 @@ public class AccountPlan {
     @NotBlank
     @Length(min = 5, max = 100, message = "Tamanho do plano de conta deve ser entre {min} e {max}")
     private String name;
+    
     private ETypeAccountPlan type;
 }
