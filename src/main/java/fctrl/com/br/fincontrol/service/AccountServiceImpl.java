@@ -6,6 +6,7 @@ import java.util.UUID;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import fctrl.com.br.fincontrol.model.Account;
@@ -19,7 +20,7 @@ public class AccountServiceImpl implements AccountService {
 
     private final AccountRepository repository;
 
-    @Transactional
+    @Transactional(propagation = Propagation.REQUIRED)
     @Override
     public Account update(Account acc, UUID id) {
         return repository.findById(id)
